@@ -1,0 +1,18 @@
+.custom-prev,
+.custom-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+
+.custom-prev {
+  left: -60px;
+}
+
+.custom-next {
+  right: -60px;
+}
