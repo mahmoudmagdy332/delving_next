@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import HeaderLayout from "../common/HeaderLayout";
 import { AboutUs } from "@/utils/types/types";
 import { useEffect } from "react";
-import { log } from "console";
+
 // import { useLanguageSelector } from "../../app/slices/languageSlice";
 
 const Hero = ({About}:{About:AboutUs[]}) => {
