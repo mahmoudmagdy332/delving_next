@@ -1,29 +1,23 @@
+'use client';
 import { Box, Typography } from "@mui/material";
 import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-import { useSettingSliceSelector } from "../../app/slices/settingSlice";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
+import { useTranslation } from 'react-i18next';
+import { useSettingSliceSelector } from "@/utils/slices/settingSlice";
+import Link from 'next/link'
+
 const Footer = () => {
   const { setting } = useSettingSliceSelector((state) => state.settingReducer);
+  const { t } = useTranslation('common');
+   
 
-  const { translations } = useLanguageSelector(
-    (state) => state.languageReducer
-  );
-
-  // const pages = [
-  //   { name: translations.home, link: "/" },
-  //   { name: translations.Courses, link: "courses" },
-  //   { name: translations.Pricing, link: "/pricing" },
-  //   // {name:'Testimonials',link:"/testimonials"},
-  // ];
   const pages2 = [
-    { name: translations.AboutUs, link: "/about" },
-    { name: translations.Careers, link: "/careers" },
-    { name: translations.FAQs, link: "/faq" },
-    { name: translations.Help, link: "/help" },
+    { name: t('AboutUs'), link: "/about" },
+    { name: t('Careers'), link: "/careers" },
+    { name: t('FAQs'), link: "/faq" },
+    { name: t('Help'), link: "/help" },
   ];
 
   const sosials = [
@@ -46,7 +40,7 @@ const Footer = () => {
           </Box>
           <div className="flex flex-col gap-3 items-center md:items-start">
             {setting?.pages.map((page) => (
-              <Link to={`page/${page.slug}`}>
+              <Link href={`page/${page.slug}`} key={page.slug}>
                 <Typography
                   sx={{ color: "#fcfcfd", "&:hover": { color: "#ffe266" } }}
                 >
@@ -56,8 +50,8 @@ const Footer = () => {
             ))}
           </div>
           <div className="flex flex-col gap-3 items-center md:items-start">
-            {pages2.map((page) => (
-              <Link to={page.link}>
+            {pages2.map((page,idx) => (
+              <Link href={page.link} key={idx}>
                 <Typography
                   sx={{ color: "#fcfcfd", "&:hover": { color: "#ffe266" } }}
                 >
@@ -69,21 +63,21 @@ const Footer = () => {
 
           <div className="flex flex-col gap-6 items-start">
             <Link
-              to={setting?.contact.phone ? setting?.contact.phone : ""}
+              href={setting?.contact.phone ? setting?.contact.phone : ""}
               className="flex gap-2 items-center"
             >
               <img alt="" src="/images/ICONS/telephone-white.svg" />
               <div className="text-sm text-white">{setting?.contact.phone}</div>
             </Link>
             <Link
-              to={setting?.contact.email ? setting?.contact.email : ""}
+              href={setting?.contact.email ? setting?.contact.email : ""}
               className="flex gap-2 items-center"
             >
               <img alt="" src="/images/ICONS/email-white.svg" />
               <div className="text-sm text-white">{setting?.contact.email}</div>
             </Link>
             <Link
-              to={setting?.contact.address ? setting?.contact.address : ""}
+              href={setting?.contact.address ? setting?.contact.address : ""}
               className="flex gap-2 items-center"
             >
               <img alt="" src="/images/ICONS/location-white.svg" />
@@ -93,8 +87,8 @@ const Footer = () => {
             </Link>
 
             <div className="flex gap-4 mt-5 col-span-2 lg:col-span-1  justify-center lg:justify-end ">
-              {sosials.map((sosial) => (
-                <a href={sosial.link ? sosial.link : ""} target="_blank">
+              {sosials.map((sosial,idx) => (
+                <a href={sosial.link ? sosial.link : ""} key={idx} target="_blank">
                   <Box
                     sx={{
                       color: "#fcfcfd",
@@ -111,20 +105,20 @@ const Footer = () => {
         </Box>
         <Box className="mt-5 flex flex-col lg:flex-row gap-4 justify-between py-5 border-t">
           <div className="flex gap-4">
-            <Link to="/Terms">
+            <Link href="/Terms">
               <Typography sx={{ color: "gray.light" }}>
-                {translations.Terms}
+                {t('Terms')}
               </Typography>
             </Link>
-            <Link to="/Privacy">
+            <Link href="/Privacy">
               <Typography sx={{ color: "gray.light" }}>
-                {translations.Privacy}
+                {t('Privacy')}
               </Typography>
             </Link>
           </div>
           <div className="flex">
             <Typography sx={{ color: "gray.light" }}>
-              {translations.copyWrite}
+              {t('copyWrite')}
             </Typography>
           </div>
         </Box>

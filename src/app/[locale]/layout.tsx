@@ -1,24 +1,29 @@
 import "./globals.css";
-import LanguageChanger from '@/components/LanguageChanger';
 import Provider from '@/utils/Providers';
-
+import '../i18n'; 
+import MainLayout from "@/components/layout/MainLayout";
 export const metadata = {
   title: 'Your App Title',
   description: 'Your app description',
 };
- function RootLayout({
-  children,
+ async function RootLayout({
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+      
   return (
     <html>
     
       <body
       >
-        <LanguageChanger/>
+
         <Provider>
-           {children}
+          <MainLayout>
+             {children}
+          </MainLayout>
+           
         </Provider>
        
        

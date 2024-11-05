@@ -1,6 +1,6 @@
 
 import PropagateLoader from "react-spinners/ClipLoader";
-import {  tokens, useMode } from "../../Theme";
+import {  tokens, useMode } from "@/utils/Theme";
 const Loader = () => {
   const [theme, colorMode,mode] = useMode();
   console.log(theme, colorMode)

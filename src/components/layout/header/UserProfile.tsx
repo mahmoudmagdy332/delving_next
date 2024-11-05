@@ -1,27 +1,18 @@
-
+'use client'
 import React from 'react'
 import { Avatar, Box, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material';
 import { Logout } from '@mui/icons-material';
-import {  RootState } from '../../../app/store';
-import { useLogout } from '../../../app/utils/hooks/useAuth';
+import {  RootState } from '@/utils/store';
+import { useLogout } from '@/utils/hooks/useAuth';
 
-import { Link } from 'react-router-dom';
-import { stringAvatar } from '../../../app/utils/hooks/stringAvatar';
-import { useUserSelector } from '../../../app/slices/UserSlice';
-import { useLanguageSelector } from '../../../app/slices/languageSlice';
-
-
-
-
-
-
+import { stringAvatar } from '@/utils/hooks/stringAvatar'; 
+import { useUserSelector } from '@/utils/slices/UserSlice'; 
+import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 
 const UserProfile = () => {
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
- 
-  const { user } = useUserSelector((state: RootState) => state.UserReducer);
+    const { t } = useTranslation('common');
+    const { user } = useUserSelector((state: RootState) => state.UserReducer);
     const {refetch}=useLogout()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -91,7 +82,7 @@ const UserProfile = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Link to="/account" className="flex gap-2 items-center">
+          <Link href="/account" className="flex gap-2 items-center">
             {user?.image?(
                <img alt='' src={user.image} className='w-10 rounded-full'/>
             ):(
@@ -124,7 +115,7 @@ const UserProfile = () => {
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          {translations.Logout}
+          {t('Logout')}
         </MenuItem>
       </Menu>
     </React.Fragment>

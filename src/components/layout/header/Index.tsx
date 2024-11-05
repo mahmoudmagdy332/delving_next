@@ -1,3 +1,4 @@
+'use client'
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -13,38 +14,33 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { ColorModeContext } from "../../../Theme";
+import { ColorModeContext } from "@/utils/Theme"; 
 import { useTheme } from "@mui/material/styles";
-import { Link, NavLink } from "react-router-dom";
 import Popup from "../../auth/Popup";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../app/store";
-import { changePopup, useUserSelector } from "../../../app/slices/UserSlice";
+import { AppDispatch } from "@/utils/store"; 
+import { changePopup, useUserSelector } from "@/utils/slices/UserSlice"; 
 import Cookies from "js-cookie";
-import { useSettingSliceSelector } from "../../../app/slices/settingSlice";
+import { useSettingSliceSelector } from "@/utils/slices/settingSlice"; 
 import UserProfile from "./UserProfile";
 import LanguageMenu from "./LanguageMenu";
-import { useLanguageSelector } from "../../../app/slices/languageSlice";
+import { useTranslation } from 'react-i18next';
+import Link from 'next/link'
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
+
   window?: () => Window;
 }
 
 const drawerWidth = 240;
 
 export default function Index(props: Props) {
-  const { translations } = useLanguageSelector(
-    (state) => state.languageReducer
-  );
+  const { t } = useTranslation('common');
   const navItems = [
-    { name: translations.home, link: "/" },
-    { name: translations.Courses, link: "courses" },
-    { name: translations.AboutUs, link: "/about" },
-    { name: translations.Pricing, link: "/pricing" },
-    { name: translations.Careers, link: "/careers" },
+    { name: t('home'), link: "/" },
+    { name: t('Courses'), link: "courses" },
+    { name: t('AboutUs'), link: "/about" },
+    { name: t('Pricing'), link: "/pricing" },
+    { name: t('Careers'), link: "/careers" },
   ];
   const { setting } = useSettingSliceSelector((state) => state.settingReducer);
   const { user } = useUserSelector((state) => state.UserReducer);
@@ -79,7 +75,7 @@ export default function Index(props: Props) {
         {navItems.map((item, idx) =>
           item.name !== "Pricing" ? (
             <ListItem key={idx} disablePadding>
-              <NavLink to={item.link}>
+              <Link href={item.link}>
                 <ListItemText
                   sx={{
                     color: "primary.light",
@@ -87,12 +83,12 @@ export default function Index(props: Props) {
                   }}
                   primary={item.name}
                 />
-              </NavLink>
+              </Link>
             </ListItem>
           ) : (
             !user?.is_premium && (
               <ListItem key={idx} disablePadding>
-                <NavLink to={item.link}>
+                <Link href={item.link}>
                   <ListItemText
                     sx={{
                       color: "primary.light",
@@ -100,7 +96,7 @@ export default function Index(props: Props) {
                     }}
                     primary={item.name}
                   />
-                </NavLink>
+                </Link>
               </ListItem>
             )
           )
@@ -111,7 +107,7 @@ export default function Index(props: Props) {
         <></>
       ) : (
         <div className="mt-4">
-          <Link to="/intro">
+          <Link href="/intro">
             <Button
               sx={{
                 bgcolor: "transparent",
@@ -140,7 +136,7 @@ export default function Index(props: Props) {
             }}
             onClick={handleClickOpen}
           >
-            {translations.login}
+            {t('login')}
           </Button>
         </div>
       )}
@@ -182,11 +178,10 @@ export default function Index(props: Props) {
             >
               {navItems.map((item) =>
                 item.name !== "Pricing" ? (
-                  <NavLink
-                    to={item.link}
-                    className={({ isActive }) =>
-                      ` ${isActive ? "bg-[#e3e3e364] rounded-md "  : " "} `
-                    }
+                  <Link
+                  key={item.name}
+                    href={item.link}
+                    className="bg-[#e3e3e364] rounded-md "
                   >
                     <Typography
                       sx={{
@@ -203,10 +198,10 @@ export default function Index(props: Props) {
                     >
                       {item.name}
                     </Typography>
-                  </NavLink>
+                  </Link>
                 ) : (
                   !user?.is_premium && (
-                    <NavLink to={item.link}>
+                    <Link href={item.link}>
                       <Typography
                         sx={{
                           color: "text.primary",
@@ -222,7 +217,7 @@ export default function Index(props: Props) {
                       >
                         {item.name}
                       </Typography>
-                    </NavLink>
+                    </Link>
                   )
                 )
               )}
@@ -241,7 +236,7 @@ export default function Index(props: Props) {
                     alignItems: "center",
                   }}
                 >
-                  <Link to="/intro">
+                  <Link href="/intro">
                     <Button
                       sx={{
                         bgcolor: "transparent",
@@ -254,7 +249,7 @@ export default function Index(props: Props) {
                       }}
                     >
                       {" "}
-                  {translations.signup}
+                  {t('signup')}
                     </Button>
                   </Link>
                   <Button
@@ -270,7 +265,7 @@ export default function Index(props: Props) {
                     }}
                     onClick={handleClickOpen}
                   >
-                    {translations.login}
+                    {t('login')}
                   </Button>
 
                   <LanguageMenu />

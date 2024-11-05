@@ -1,14 +1,12 @@
+'use client'
 import { Box } from "@mui/material";
 import { useGoogleLogin } from "@react-oauth/google"; // Ensure this is the correct import
-import { useSocialLogin } from "../../../app/utils/hooks/useAuth";
-import { useLanguageSelector } from "../../../app/slices/languageSlice";
+import { useSocialLogin } from "@/utils/hooks/useAuth"; 
+import { useTranslation } from "react-i18next";
 
 const GoogleLogin = () => {
 
-
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
+  const { t } = useTranslation('common');
   const { mutate } = useSocialLogin();
 
   const login = useGoogleLogin({
@@ -36,7 +34,7 @@ const GoogleLogin = () => {
       className="cursor-pointer transition-all ease-in-out rounded-full py-3 font-semibold hover:shadow-lg flex justify-center items-center gap-2 w-full"
     >
       <img alt="Google Icon" src="/images/ICONS/google.svg" />
-      {translations.LogGoogle}
+      {t('LogGoogle')}
       <div>
   
     </div>

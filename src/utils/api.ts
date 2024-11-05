@@ -8,56 +8,66 @@ import {
   socialLogin,
   userData,
 } from "./types/types";
-import { baseUrl } from "./config";
+import { baseUrlClient } from "./config";
 
-const api = axios.create({
-  baseURL: baseUrl('en'),
+const api = (locale: string) =>{
+  return axios.create({
+    baseURL: `https://dashboard.delveng.com/${locale}/api`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+ 
+
+const apiClient = axios.create({
+  baseURL: baseUrlClient(),
   headers: {
     "Content-Type": "application/json",
   },
 });
-
 export const SingleBookAPI = (id: string) =>
-  api.post("bookById", null, {
+  apiClient.post("bookById", null, {
     params: {
       book_id: id,
     },
   });
 export const SingleInstructorAPI = (id: string) =>
-  api.post("instructorById", { user_id: id });
+  apiClient.post("instructorById", { user_id: id });
 
-export const postSocialLoginUserAPI = (data: socialLogin) => api.post("social/login", data);
-export const postSignupUserApi = (data: userData) => api.post("signup", data);
-export const getSettingAPI = () => api.get("settings");
-export const getCategoriesQueryAPI = () => api.get("categories");
+export const postSocialLoginUserAPI = (data: socialLogin) => apiClient.post("social/login", data);
+export const postSignupUserApi = (data: userData) => apiClient.post("signup", data);
+export const getSettingAPI = () => apiClient.get("settings");
+export const getCategoriesQueryAPI = () => apiClient.get("categories");
 
-export const getHomeAPI = () => api.get("home");
+export const getHomeAPI = () => apiClient.get("home");
 
-export const getAboutAPI = () => api.get("about-us");
-export const getTermsAPI = () => api.get("terms");
-export const getCareerAPI = (id:string|undefined) => api.get(`career/${id}`);
-export const getPageAPI = (id:string|undefined) => api.get(`page/${id}`);
+// export const getAboutAPI = (locale:string) => api.get("about-us");
+export const getAboutAPI = (locale:string) => api(locale).get("about-us");
+export const getTermsAPI = () => apiClient.get("terms");
+export const getCareerAPI = (id:string|undefined) => apiClient.get(`career/${id}`);
+export const getPageAPI = (id:string|undefined) => apiClient.get(`page/${id}`);
 
-export const getFQsAPI = () => api.get("questions");
-export const getTestimonialsAPI = () => api.get("testimonials");
-export const getPrivaciesAPI = () => api.get("privacies");
-export const getPackagesAPI = () => api.get("packages");
-export const getCountriesAPI = () => api.get("countries");
+export const getFQsAPI = () => apiClient.get("questions");
+export const getTestimonialsAPI = () => apiClient.get("testimonials");
+export const getPrivaciesAPI = () => apiClient.get("privacies");
+export const getPackagesAPI = () => apiClient.get("packages");
+export const getCountriesAPI = () => apiClient.get("countries");
 
-export const getIntroAPI = () => api.get("intro");
-export const courseIdAPI = (id: string | undefined) => api.get(`course/${id}`);
+export const getIntroAPI = () => apiClient.get("intro");
+export const courseIdAPI = (id: string | undefined) => apiClient.get(`course/${id}`);
 
-export const getCareersAPI = () => api.get("careers");
-export const postLoginUserAPI = (data: userData) => api.post("login", data);
+export const getCareersAPI = () => apiClient.get("careers");
+export const postLoginUserAPI = (data: userData) => apiClient.post("login", data);
 export const ForgetPasswordAPI = (data: userData) =>
-  api.post(`forgetPassword?email=${data.email}`);
+  apiClient.post(`forgetPassword?email=${data.email}`);
 export const ConfrimCodeAPI = (data: confrimCode) =>
-  api.post("confrimCode", data);
+  apiClient.post("confrimCode", data);
 export const ConfirmSignupCodeAPI = (data: confrimCode) =>
-  api.post("confirmSignupCode", data);
+  apiClient.post("confirmSignupCode", data);
 
 export const confrimPasswordAPI = (data: confrimPassword) =>
-  api.post("confrimPassword", data, {
+  apiClient.post("confrimPassword", data, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${data.token}`,
@@ -65,9 +75,9 @@ export const confrimPasswordAPI = (data: confrimPassword) =>
   });
 
 export const CategoryCoursesAPI = (id: string) =>
-  api.post("courses/filter/bycaregory", { category_id: id });
+  apiClient.post("courses/filter/bycaregory", { category_id: id });
 export const coursesAPI = ({ name, id, currentPage }: CoursesParams) =>
-  api.get(`courses`, {
+  apiClient.get(`courses`, {
     params: {
       category_id: id,
       search: name,
@@ -75,34 +85,34 @@ export const coursesAPI = ({ name, id, currentPage }: CoursesParams) =>
     },
   });
 export const ArticleCategoryAPI = ({ name }: { name: string | undefined }) =>
-  api.get(`search`, {
+  apiClient.get(`search`, {
     params: {
       name: name,
     },
   });
 
 export const ArticlesByIdAPI = (id: string | undefined) =>
-  api.get(`category-articles?category_id=${id}`);
+  apiClient.get(`category-articles?category_id=${id}`);
 export const CoursesAPI = (filter: filterType, currentPage: number) =>
-  api.post(`courses/filter?page=${currentPage}`, filter);
+  apiClient.post(`courses/filter?page=${currentPage}`, filter);
 
 export const instructorsAPIPagination = (currentPage: number) =>
-  api.get(`instructors-paginate?page=${currentPage}`);
+  apiClient.get(`instructors-paginate?page=${currentPage}`);
 export const PackagesAPIPagination = (currentPage: number) =>
-  api.get(`package-paginate?page=${currentPage}`);
+  apiClient.get(`package-paginate?page=${currentPage}`);
 
 export const SearchInstructorAPI = (name: string) =>
-  api.post("serach-instructor", { name: name });
-export const instructorsAPI = () => api.get("instructors");
+  apiClient.post("serach-instructor", { name: name });
+export const instructorsAPI = () => apiClient.get("instructors");
 
 export const SinglePackageAPI = (id: string) =>
-  api.post("packageById", { package_id: id });
+  apiClient.post("packageById", { package_id: id });
 
 export const CourseDetailsAPI = (id: string) =>
-  api.post("/courseById", { course_id: id });
+  apiClient.post("/courseById", { course_id: id });
 
 export const contactUsAPI = (contuctForm: IFormContuctInput) =>
-  api.post("/contact-us", contuctForm);
+  apiClient.post("/contact-us", contuctForm);
 
 export const allBooksAPI = (currentPage: number) =>
-  api.get(`book-paginate?page=${currentPage}`);
+  apiClient.get(`book-paginate?page=${currentPage}`);

@@ -5,6 +5,7 @@ export function middleware( request) {
     return i18nRouter(request, i18nConfig) ;
 }
 
-// export const config = {
-// matcher: '/(( ?! api|static|. * \\ .. ||_next) .* )'
-// }
+export const config = {
+    // Match only internationalized pathnames
+    matcher: ['/en', '/(ar|en)/:path*']
+  };

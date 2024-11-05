@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { GrLanguage } from "react-icons/gr";
-import { useDispatch } from "react-redux";
-import {
-  changeLanguage,
-  useLanguageSelector,
-} from "../../../app/slices/languageSlice";
 import {
   Avatar,
   Box,
@@ -16,18 +12,57 @@ import {
   Tooltip,
 } from "@mui/material";
 import { Logout, PersonAdd } from "@mui/icons-material";
-
+import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import Cookies from "js-cookie";
 const LanguageMenu = () => {
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
+  const { t } = useTranslation('common');
   const [isLogin] = useState(false);
-  const { lang } = useLanguageSelector((state) => state.languageReducer);
-  const dispatch = useDispatch();
-  const change = (lang: string) => {
-    dispatch(changeLanguage(lang));
-    setAnchorEl(null);
-    window.location.reload();
+  const currentPathname = usePathname();
+  const storelocale = Cookies.get("NEXT_LOCALE");
+  const router = useRouter();
+  const [currentLocale,setCurrentLocale]=useState<string>();
+  useEffect(()=>{
+    if(storelocale){
+      setCurrentLocale(storelocale)
+    }
+    else{
+      setCurrentLocale('en')
+    }
+  },[storelocale])
+  useEffect(()=>{
+    if(currentPathname.includes('/en')){
+      router.push(
+        currentPathname.replace(`/en`,`/${currentLocale}`)
+      );
+    }else{
+      router.push(
+        currentPathname.replace(`/ar`,`/${currentLocale}`)
+      );
+    }
+    router.refresh();
+    
+  },[currentLocale])
+  const change = (e:string) => {
+    const newLocale = e;
+
+    // set cookie for next-i18n-router
+    const days = 30;
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = date.toUTCString();
+    document.cookie = `NEXT_LOCALE=${newLocale};expires=${expires};path=/`;
+
+     console.log('currentLocale',currentLocale);
+     console.log('newLocale',newLocale);
+     console.log('currentPathname',currentPathname);
+     setCurrentLocale(newLocale)
+      // router.push(
+      //   currentPathname.replace(`/${currentLocale}`, `/${newLocale}`)
+      // );
+      // router.refresh();
+      // window.location.reload();
   };
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -96,24 +131,24 @@ const LanguageMenu = () => {
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
             <MenuItem onClick={handleClose}>
-              <Avatar /> {translations.Profile}
+              <Avatar /> {t('Profile')}
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <Avatar /> {translations.Myaccount}
+              <Avatar /> {t('Myaccount')}
             </MenuItem>
             <Divider />
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <PersonAdd fontSize="small" />
               </ListItemIcon>
-              {translations.AddAccount}
+              {t('AddAccount')}
             </MenuItem>
 
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
-              {translations.Logout}
+              {t('Logout')}
             </MenuItem>
           </Menu>
         ) : (
@@ -147,17 +182,17 @@ const LanguageMenu = () => {
               "aria-labelledby": "basic-button",
             }}
           >
-            {lang === "en" ? (
+            {currentLocale === "en" ? (
               <MenuItem
                 onClick={() => change("ar")}
-                className={`${lang !== "en" && "hidden"}`}
+                className={`${currentLocale !== "en" && "hidden"}`}
               >
                 Ar
               </MenuItem>
             ) : (
               <MenuItem
                 onClick={() => change("en")}
-                className={`${lang === "en" && "hidden"}`}
+                className={`${currentLocale === "en" && "hidden"}`}
               >
                 En
               </MenuItem>

@@ -1,14 +1,29 @@
 "use client"
-import { ReactNode } from "react" 
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query" 
+import { ReactNode, useState } from "react" 
+import { ColorModeContext, useMode } from "./Theme";
+import { Provider as ReduxProvider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import { useState } from "react" 
+
+import { store } from "./store"; 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+
 export default function Provider({ children }: { children: ReactNode }) {
 const [queryClient] = useState(() => new QueryClient())
+const [theme, colorMode] = useMode();
 return (
-
-<QueryClientProvider client={queryClient}>
-    {children}
-</QueryClientProvider>
+    <ColorModeContext.Provider value={colorMode}>
+     {/* <ThemeProvider theme={theme}> */}
+       {/* <CssBaseline /> */}
+    <ReduxProvider store={store}>
+        <QueryClientProvider client={queryClient}>
+         {/* <ToastContainer /> */}
+            {children}
+        </QueryClientProvider>
+    </ReduxProvider>
+    {/* </ThemeProvider> */}
+    </ColorModeContext.Provider>
 )
 }

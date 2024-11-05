@@ -1,39 +1,32 @@
-import { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+"use client"
+import { ReactNode, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useSettingSliceSelector } from "../../app/slices/settingSlice";
-import { updateUser } from "../../app/slices/UserSlice";
-import Loader from "../common/Loader";
-import useSetting from "../../app/utils/hooks/useSetting";
-import useCategories from "../../app/utils/hooks/useCategories";
-import { changeLanguage, useLanguageSelector } from "../../app/slices/languageSlice";
 
-const MainLayout = () => {
+import { updateUser } from "@/utils/slices/UserSlice";
+import Loader from "../common/Loader";
+import useSetting from "@/utils/hooks/useSetting";
+import useCategories from "@/utils/hooks/useCategories";
+import { useSettingSliceSelector } from "@/utils/slices/settingSlice";
+import Cookies from "js-cookie";
+const MainLayout = ({ children }: { children: ReactNode }) => {
   
   useCategories();
   const { error } = useSetting();
   const { loading } = useSettingSliceSelector((state) => state.settingReducer);
-  const { pathname } = useLocation();
 
   const dispatch = useDispatch();
-  const { lang } = useLanguageSelector((state) => state.languageReducer);
-
+  const lang = Cookies.get("NEXT_LOCALE");
   useEffect(() => {
-    const language = localStorage.getItem("lang");
-    if (language) {
-      dispatch(changeLanguage(language));
-    }
+    
     const student = localStorage.getItem("student");
     if (student) {
       dispatch(updateUser(JSON.parse(student)));
     }
   }, []);
 
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  useEffect(() => {
-    console.log('lang',lang);
+  
     
     if (lang === "ar") document.documentElement.dir = "rtl";
     else document.documentElement.dir = "ltr";
@@ -50,7 +43,13 @@ const MainLayout = () => {
         Error: {error.message}
       </div>
     );
-  return <Outlet/>;
+
+  return (
+
+    <>
+        {children}
+    </>
+    )
 };
 
 export default MainLayout;

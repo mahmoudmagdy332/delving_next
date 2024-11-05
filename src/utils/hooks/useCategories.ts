@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { categoriesQuery } from "../../services/queries";
+import { categoriesQuery } from "../services/queries"; 
 import { useEffect } from "react";
-import { AppDispatch } from "../../store";
-import { setCategories } from "../../slices/categoriesSlice";
+import { AppDispatch } from "../store";
+import { setCategories } from "../slices/categoriesSlice";
 
 const useCategories = () => {
     const dispatch = useDispatch<AppDispatch>();

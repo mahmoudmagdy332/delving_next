@@ -1,6 +1,7 @@
+"use client";
 import { useDispatch } from "react-redux";
-import { authUserQuery, logoutQuery } from "../../services/queries";
-import { AppDispatch } from "../../store";
+import { authUserQuery, logoutQuery } from "@/utils/services/queries";
+import { AppDispatch } from "../store";
 import { useEffect } from "react";
 import {
   useChangePasswordMutation,
@@ -9,13 +10,14 @@ import {
   useSignupMutation,
   useSocialLoginMutation,
   useUpdateUserMutation,
-} from "../../services/mutation";
+} from "@/utils/services/mutation";
 
-import { useNavigate } from "react-router-dom";
-import { changePopup, setUser, updateUser } from "../../slices/UserSlice";
+
+import { changePopup, setUser, updateUser } from "@/utils/slices/UserSlice";
+import { useRouter } from "next/navigation";
 
 export const useLogin = () => {
-  const navigator = useNavigate();
+  const router = useRouter()
   const dispatch = useDispatch<AppDispatch>();
   const { mutate, isSuccess, data, isPending, isError, error, status } =
     useLoginMutation();
@@ -29,7 +31,7 @@ export const useLogin = () => {
     if (isError) {
       console.log("error", error);
       if (error?.response?.data?.status === 0) {
-        navigator("/signUp/confirm-Code");
+        router.push("/signUp/confirm-Code");
       }
     }
   }, [isSuccess, isError]);
@@ -46,7 +48,7 @@ export const useLogin = () => {
   };
 };
 export const useSocialLogin = () => {
-  const navigator = useNavigate();
+  const router = useRouter()
   const dispatch = useDispatch<AppDispatch>();
   const { mutate, isSuccess, data, isPending, isError, error, status } =
   useSocialLoginMutation();
@@ -57,12 +59,12 @@ export const useSocialLogin = () => {
       dispatch(setUser(data.data.data));
       // console.log("dataasdasdasdasdasd", );
       dispatch(changePopup(false));
-      navigator("/");
+      router.push("/");
     }
     if (isError) {
       console.log("error", error);
       if (error?.response?.data?.status === 0) {
-        navigator("/signUp/confirm-Code");
+        router.push("/signUp/confirm-Code");
       }
     }
   }, [isSuccess, isError]);
@@ -79,26 +81,26 @@ export const useSocialLogin = () => {
   };
 };
 export const useSignUp = () => {
-  const navigator = useNavigate();
+  const router = useRouter()
   const { mutate, isPending, isSuccess, error, isError } = useSignupMutation();
 
   const ErrorCheck = error?.response?.status === 422;
 
   useEffect(() => {
-    if (isSuccess) navigator("/signUp/confirm-Code");
+    if (isSuccess) router.push("/signUp/confirm-Code");
   }, [isSuccess]);
   return { mutate, isSuccess, isPending, isError, error, ErrorCheck };
 };
 
 export const useConfirmSignupCode = () => {
-  const navigator = useNavigate();
+  const router = useRouter()
   // const dispatch = useDispatch<AppDispatch>();
   const { mutate, data, isPending, isSuccess, error, isError } =
     useConfirmSignupCodeMutation();
   const ErrorCheck = error?.response?.status === 422;
 
   useEffect(() => {
-    if (isSuccess) navigator("/login");
+    if (isSuccess) router.push("/login");
   }, [isSuccess, data]);
 
   return { mutate, isSuccess, isPending, isError, error, ErrorCheck };

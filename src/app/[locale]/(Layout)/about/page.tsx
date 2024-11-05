@@ -7,12 +7,12 @@ import { getAboutAPI } from '@/utils/api';
 const i18nNamespaces = ['common'];
 const about = async ({ params: { locale } }:{params: { locale:string }}) => {
   const {  resources } = await initTranslations(locale, i18nNamespaces);
-      const {data} = await getAboutAPI();
+      const {data} = await getAboutAPI(locale);
       if (!data) {
         return <p>Failed to load data</p>;
       }
   return (
-      <TranslationsProvider
+      <TranslationsProvider 
       namespaces={i18nNamespaces}
       locale={locale}
       resources={resources}>

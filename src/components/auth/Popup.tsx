@@ -1,14 +1,14 @@
-
+'use client'
 import Dialog from '@mui/material/Dialog';
 
 import Typography from '@mui/material/Typography';
 
-import { changePopup, useUserSelector } from '../../app/slices/UserSlice';
+import { changePopup, useUserSelector } from '@/utils/slices/UserSlice';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../app/store';
+import { AppDispatch } from '@/utils/store'; 
 import { Box } from '@mui/material';
-import { Link } from 'react-router-dom';
 import GoogleLogin from './login/GoogleLogin';
+import Link from 'next/link';
 
 
 
@@ -43,7 +43,7 @@ export default function Popup() {
           {/* <Box sx={{borderWidth:'1px 1px 3px 1px',borderStyle:'solid',borderColor:'black.dark'}}  className='cursor-pointer  transition-all ease-in-out rounded-full py-3 font-semibold hover:shadow-lg flex justify-center items-center gap-2 w-full '>
           <img src='/images/ICONS/apple.svg'/>Log in with Apple
           </Box> */}
-          <Link to="/Login-with-email" onClick={handleClose} className='w-full'>
+          <Link href="/Login-with-email" onClick={handleClose} className='w-full'>
           <Box sx={{backgroundColor:'gray.dark',color:'gray.light',borderWidth:'1px 1px 3px 1px',borderStyle:'solid',borderColor:'black.dark'}}  className='cursor-pointer  transition-all ease-in-out rounded-full py-3 font-semibold hover:shadow-lg flex justify-center items-center gap-2 w-full mb-5'>
            Log in with Email
           </Box>

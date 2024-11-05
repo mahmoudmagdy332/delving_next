@@ -41,7 +41,6 @@ const Hero = ({About}:{About:AboutUs[]}) => {
             <div
           dangerouslySetInnerHTML={{ __html: about_des }}
           className=" text-center"
-          
         />
           ) }
      

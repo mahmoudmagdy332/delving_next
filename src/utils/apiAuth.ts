@@ -6,7 +6,7 @@ import { ApplyJop, password, userUpdateData } from "./types/types";
 import { answerType } from "./types/types";
 
 const api = axios.create({
-  baseURL: baseUrl(),
+  baseURL: baseUrl,
   headers: {
     "Content-Type": "application/json",
   },
