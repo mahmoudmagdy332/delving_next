@@ -8,11 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { store } from "./store"; 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+// import { CssBaseline, ThemeProvider } from "@mui/material";
 
 export default function Provider({ children }: { children: ReactNode }) {
 const [queryClient] = useState(() => new QueryClient())
-const [theme, colorMode] = useMode();
+const [ colorMode] = useMode();
 return (
     <ColorModeContext.Provider value={colorMode}>
      {/* <ThemeProvider theme={theme}> */}

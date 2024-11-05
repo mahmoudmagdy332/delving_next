@@ -1,12 +1,14 @@
 
 
-
-import type { NextConfig } from 'next'
+import createNextIntlPlugin from 'next-intl/plugin';
  
-const nextConfig: NextConfig = {
+const withNextIntl = createNextIntlPlugin();
+ 
+/** @type {import('next').NextConfig} */
+const nextConfig = {
     images:{
         domains:['dashboard.delveng.com'],
        },
-}
+};
  
-export default nextConfig
+export default withNextIntl(nextConfig);
