@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { store } from "./store"; 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { clientId } from "./config";
 // import { CssBaseline, ThemeProvider } from "@mui/material";
 
 export default function Provider({ children }: { children: ReactNode }) {
@@ -21,7 +23,10 @@ return (
     <ReduxProvider store={store}>
         <QueryClientProvider client={queryClient}>
          <ToastContainer />
-            {children}
+         <GoogleOAuthProvider clientId={clientId} >
+          {children}
+         </GoogleOAuthProvider>
+
         </QueryClientProvider>
     </ReduxProvider>
     </ThemeProvider>

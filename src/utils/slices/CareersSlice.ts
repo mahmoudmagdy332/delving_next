@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { CareersSliceType } from "../utils/types/types";
+import { CareersSliceType } from "../types/types"; 
 
 const initialState: CareersSliceType = {
   careers: null,

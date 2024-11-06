@@ -1,11 +1,12 @@
+'use client';
 import * as React from 'react';
-import {  Button } from '@mui/material';
+import {  Box, Button, styled } from '@mui/material';
 import { Input as BaseInput } from '@mui/base/Input';
-import { Box, styled } from '@mui/system';
-import { CircularProgress } from '@mui/material';
-import { confrimCode } from '../../app/utils/types/types';
+
+import { CircularProgress } from   '@mui/material';
+import { confrimCode } from '@/utils/types/types';
 import { AxiosError } from 'axios';
-import { CustomError } from '../../app/services/mutation';
+import { CustomError } from '@/utils/services/mutation'; 
 
 function OTP({
   separator,

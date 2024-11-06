@@ -4,15 +4,15 @@ import {
   setCourses,
   setLastPage,
   setSingleCourse,
-} from "../../slices/coursesSlice";
+} from "@/utils/slices/coursesSlice";
 import {
   CourseIdQuery,
   CoursesQuery,
   MyLearningIdQuery,
-} from "../../services/queries";
+} from "@/utils/services/queries";
 import { CoursesParams } from "../types/types";
 import Cookies from "js-cookie";
-import { useUserSelector } from "../../slices/UserSlice";
+import { useUserSelector } from "@/utils/slices/UserSlice";
 
 export const useCourses = ({ name, id, currentPage }: CoursesParams) => {
   console.log(id);

@@ -1,12 +1,12 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { baseUrl } from "./config";
+import {  baseUrlClient } from "./config";
 import { ApplyJop, password, userUpdateData } from "./types/types";
 
 import { answerType } from "./types/types";
 
 const api = axios.create({
-  baseURL: baseUrl,
+  baseURL: baseUrlClient(),
   headers: {
     "Content-Type": "application/json",
   },

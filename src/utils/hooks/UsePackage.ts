@@ -1,7 +1,8 @@
+"use client"
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { packagesQuery } from "../../services/queries";
-import { setPackages } from "../../slices/PackageSLice";
+import { packagesQuery } from "../services/queries"; 
+import { setPackages } from "../slices/PackageSLice"; 
 
 export const UsePackages = () => {
   const dispatch = useDispatch();

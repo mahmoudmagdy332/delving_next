@@ -1,17 +1,17 @@
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
-import { course } from "../../app/utils/types/types";
+
+import { course } from "@/utils/types/types"; 
 import React from "react";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+
 
 interface courseProps {
   course: course;
 }
 
 const CourseCard: React.FC<courseProps> = ({ course }) => {
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
+  const t = useTranslations('common');
   return (
     <div className="w-full flex flex-col gap-5 border rounded-md p-4 h-full">
       <div className="flex justify-center mb-3">
@@ -25,7 +25,7 @@ const CourseCard: React.FC<courseProps> = ({ course }) => {
         />
       </div>
       <div className="mt-auto">
-        <Link to={`/courses/${course?.id}`}>
+        <Link href={`/courses/${course?.id}`}>
           <Button
             sx={{
               color: "black.light",
@@ -40,7 +40,7 @@ const CourseCard: React.FC<courseProps> = ({ course }) => {
               },
             }}
           >
-            {translations.ViewPath}
+            {t('ViewPath')}
           </Button>
         </Link>
       </div>

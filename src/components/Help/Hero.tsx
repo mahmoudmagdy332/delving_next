@@ -1,19 +1,20 @@
+"use client"
 import SearchTwoToneIcon from "@mui/icons-material/SearchTwoTone";
 import { Box, Input, Typography } from "@mui/material";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { setSearch } from "../../app/slices/ArticleCatSlice";
+import { setSearch } from "@/utils/slices/coursesSlice"; 
 import { IoMdClose } from "react-icons/io";
 // import { useLanguageSelector } from "../../app/slices/languageSlice";
-import { useSettingSliceSelector } from "../../app/slices/settingSlice";
+import { useSettingSliceSelector } from "@/utils/slices/settingSlice";
+
 interface FormValues {
   name: string;
 }
 function Hero() {
-  // const { translations } = useLanguageSelector(
-  //   (store) => store.languageReducer
-  // );
+ 
+  
   const { setting } = useSettingSliceSelector((state) => state.settingReducer);
 
   const dispatch = useDispatch();

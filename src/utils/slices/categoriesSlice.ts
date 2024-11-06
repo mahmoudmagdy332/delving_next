@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { categoryType} from '../utils/types/types';
+import { categoryType } from '../types/types';
 
 const initialState:{categories:categoryType[]|null}={ 
     categories:null,

@@ -1,10 +1,11 @@
+'use client';
 import { Button, CircularProgress, TextField } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { confrimPassword } from "../../app/utils/types/types";
+import { confrimPassword } from "@/utils/types/types"; 
 import { AxiosError } from "axios";
-import { CustomError } from "../../app/services/mutation";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
-import { inputStyle } from "../../pages/LoginWith";
+import { CustomError } from "@/utils/services/mutation"; 
+import { inputStyle } from "@/app/[locale]/Login-with-email/page"; 
+import { useTranslations } from "next-intl";
 
 type PasswordInputProps = {
   mutate: (data: confrimPassword) => void;
@@ -20,9 +21,7 @@ const ChangePassword = ({
   error,
   token,
 }: PasswordInputProps) => {
-  const { translations } = useLanguageSelector(
-    (state) => state.languageReducer
-  );
+  const t = useTranslations('common');
   const {
     register,
     formState: { errors },
@@ -36,10 +35,10 @@ const ChangePassword = ({
   return (
     <div className="flex flex-col gap-6 items-center">
       <h4 className="font-bold text-2xl text-Primary">
-        {translations.GetPassword}{" "}
+        {t('GetPassword')}{" "}
       </h4>
       <p className="text-center text-xl text-gray-400">
-        {translations.GetPasswordMessage}
+        {t('GetPasswordMessage')}
       </p>
       <form
         className=" flex flex-col gap-4 w-full"
@@ -75,11 +74,11 @@ const ChangePassword = ({
         <button className='flex justify-center bg-primary   duration-400 items-center gap-3 rounded-sm py-3" py-2.5   text-white hover:bg-Secondary transition-all duration-300'>
           {isPending ? (
              <Button   sx={{backgroundColor:'gray.dark',color:'gray.light',borderRadius:'100px',borderWidth:'1px 1px 3px 1px',borderStyle:'solid',borderColor:'black.dark',py:'12px', mt:'30px',"&:hover":{color:'gray.dark'}}}  className='transition-all ease-in-out  font-semibold hover:shadow-lg flex gap-3 items-center  w-full '>
-              {translations.Loading}{" "}<CircularProgress size={20} color="inherit" />
+              {t('Loading')}{" "}<CircularProgress size={20} color="inherit" />
            </Button>
           ) : (
              <Button   type="submit" sx={{backgroundColor:'gray.dark',color:'gray.light',borderRadius:'100px',borderWidth:'1px 1px 3px 1px',borderStyle:'solid',borderColor:'black.dark',py:'12px', mt:'30px',"&:hover":{color:'gray.dark'}}}  className='transition-all ease-in-out  font-semibold hover:shadow-lg flex   w-full '>
-             {translations.Submit}
+             {t('Submit')}
            </Button>
           )}
         </button>

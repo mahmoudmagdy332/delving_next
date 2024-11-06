@@ -1,12 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import HeaderLayout from "../common/HeaderLayout";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
-import { useSettingSliceSelector } from "../../app/slices/settingSlice";
+
+import { useSettingSliceSelector } from "@/utils/slices/settingSlice"; 
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
+  const { t } = useTranslation('common');
   const { setting } = useSettingSliceSelector((state) => state.settingReducer);
 
   return (
@@ -21,10 +20,10 @@ const Hero = () => {
               fontWeight: "bold",
             }}
           >
-            {translations.Delveng}{" "}
+            {t("Delveng")}{" "}
             <Box component="span" sx={{ color: "yellow.main" }}>
           
-              {translations.Careers}
+              {t("Careers")}
             </Box>
           </Typography>
         </HeaderLayout>

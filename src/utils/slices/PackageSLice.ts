@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { PackageSliceType } from "../utils/types/types";
+import { PackageSliceType } from "../types/types"; 
 
 const initialState: PackageSliceType = {
   month_package: null,

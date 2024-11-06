@@ -1,7 +1,8 @@
+"use client"
 import { useDispatch } from "react-redux";
-import { CareerQuery } from "../../services/queries";
+import { CareerQuery } from "../services/queries"; 
 import { useEffect } from "react";
-import { setCareers } from "../../slices/CareersSlice";
+import { setCareers } from "../slices/CareersSlice";
 
 export const useCareers = () => {
   const dispatch = useDispatch();

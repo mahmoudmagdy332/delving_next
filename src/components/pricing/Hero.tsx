@@ -1,13 +1,15 @@
+"use client"
 import { Box, Typography } from "@mui/material";
 import HeaderLayout from "../common/HeaderLayout";
-import { useSettingSliceSelector } from "../../app/slices/settingSlice";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
+import { useSettingSliceSelector } from "@/utils/slices/settingSlice";
+import { useTranslations } from "next-intl";
+import { UsePackages } from "@/utils/hooks/UsePackage";
+
 
 const Hero = () => {
+  const t = useTranslations('common');
   const { setting } = useSettingSliceSelector((state) => state.settingReducer);
-  const { translations } = useLanguageSelector(
-    (state) => state.languageReducer
-  );
+  UsePackages();
 
   return (
     <div className="w-10/12 lg:w-3/4 mx-auto my-20 ">
@@ -21,9 +23,9 @@ const Hero = () => {
               fontWeight: "bold",
             }}
           >
-            {translations.Our}{" "}
+            {t('Our')}{" "}
             <Box component="span" sx={{ color: "yellow.main" }}>
-              {translations.Pricing}
+              {t('Pricing')}
             </Box>
           </Typography>
         </HeaderLayout>

@@ -2,9 +2,9 @@ import { Pagination as MuiPagination } from "@mui/material";
 import {
   setCurrentPage,
   useCoursesSliceSelector,
-} from "../../app/slices/coursesSlice";
+} from "@/utils/slices/coursesSlice";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../app/store";
+import { AppDispatch } from "@/utils/store";
 
 function Pagination() {
   const { last_page, currentPage } = useCoursesSliceSelector(

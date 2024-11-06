@@ -1,9 +1,10 @@
 import {  Typography } from "@mui/material";
 import OpeningCard from "./OpeningCard";
-import { useCareerSliceSelector } from "../../app/slices/CareersSlice";
+import { useCareerSliceSelector } from "@/utils/slices/CareersSlice"; 
 import React from "react";
 import CareerLoader from "../common/CareerLoader";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
+import { useTranslation } from "react-i18next";
+
 
 interface opening {
   loading: boolean;
@@ -11,10 +12,8 @@ interface opening {
 }
 const Openings: React.FC<opening> = ({ loading, success }) => {
   const { careers } = useCareerSliceSelector((state) => state.CareersReducer);
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
-
+  
+  const { t } = useTranslation('common');
   // const { categories } = useCategoriesSliceSelector(
   //   (store) => store.categoriesReducer
   // );
@@ -24,7 +23,7 @@ const Openings: React.FC<opening> = ({ loading, success }) => {
       <Typography
         sx={{ fontFamily: "typography", fontSize: "32px", fontWeight: "500" }}
       >
-        {translations.CareerOpenings}
+        {t('CareerOpenings')}
       </Typography>
 
       {/* <div className="flex flex-wrap gap-4 my-10">
@@ -47,8 +46,8 @@ const Openings: React.FC<opening> = ({ loading, success }) => {
         ))}
       </div> */}
       <div className="flex flex-col gap-5">
-        {loading && [...Array(6)].map(() => <CareerLoader />)}
-        {success && careers?.map((career) => <OpeningCard item={career} />)}
+        {loading && [...Array(6)].map((id) => <CareerLoader key={id}/>)}
+        {success && careers?.map((career) => <OpeningCard item={career} key={career.id}/>)}
       </div>
     </div>
   );

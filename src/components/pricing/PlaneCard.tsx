@@ -1,25 +1,24 @@
+"use client"
 import { Box, Button, Typography } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import { RiCloseLargeFill } from "react-icons/ri";
 import Cookies from "js-cookie"; // Ensure you import Cookies
-
-import { Package } from "../../app/utils/types/types";
-import { useNavigate } from "react-router-dom";
-import { SubscribePackageQuery } from "../../app/services/queries";
+import { Package } from "@/utils/types/types"; 
+import { SubscribePackageQuery } from "@/utils/services/queries"; 
 import { useState } from "react";
-import { useUserSelector } from "../../app/slices/UserSlice";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
+import { useUserSelector } from "@/utils/slices/UserSlice"; 
+import { useRouter } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
+
 
 interface PackageProp {
   item: Package;
 }
 
 const PlaneCard: React.FC<PackageProp> = ({ item }) => {
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
+  const t = useTranslations('common');
   const { user } = useUserSelector((state) => state.UserReducer);
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const [PackageId, setPackageId] = useState<number>();
   const { data, refetch } = SubscribePackageQuery(PackageId);
   const handleClick = async (id: number) => {
@@ -27,7 +26,7 @@ const PlaneCard: React.FC<PackageProp> = ({ item }) => {
     const token = Cookies.get("access_token");
 
     if (!token) {
-      navigate("/login");
+      navigate.push("/login");
       return;
     }
 
@@ -35,7 +34,7 @@ const PlaneCard: React.FC<PackageProp> = ({ item }) => {
     console.log(data);
   };
   return (
-    <div className="border rounded-xl px-3 py-8 flex flex-col gap-5">
+    <div className="border rounded-xl px-3 py-8 w-96 flex flex-col gap-5">
       <Box
         sx={{
           bgcolor: "primary.light",
@@ -61,7 +60,7 @@ const PlaneCard: React.FC<PackageProp> = ({ item }) => {
             opacity: 0.6,
           }}
         >
-          /{item.duration} {translations.month}
+          /{item.duration} {t('month')}
         </Typography>
       </div>
       <Box
@@ -77,7 +76,7 @@ const PlaneCard: React.FC<PackageProp> = ({ item }) => {
           <Typography
             sx={{ fontSize: "20px", fontWeight: "600", color: "black.dark" }}
           >
-            {translations.AvailableFeatures}
+            {t('AvailableFeatures')}
           </Typography>
           <div className="flex flex-col gap-4 w-full">
             {item.features?.map((feature) => (
@@ -123,7 +122,7 @@ const PlaneCard: React.FC<PackageProp> = ({ item }) => {
             borderRadius: "0 0 20px 20px",
           }}
         >
-          {translations.getStart}
+          {t('getStart')}
         </Button>
       </Box>
     </div>

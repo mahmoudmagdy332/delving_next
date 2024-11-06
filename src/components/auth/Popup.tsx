@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/utils/store'; 
 import { Box } from '@mui/material';
 import GoogleLogin from './login/GoogleLogin';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 
 

@@ -37,7 +37,7 @@ export default function Index(props: Props) {
   const t = useTranslations('common');
   const navItems = [
     { name: t('home'), link: "/" },
-    { name: t('Courses'), link: "courses" },
+    { name: t('Courses'), link: "/courses" },
     { name: t('AboutUs'), link: "/about" },
     { name: t('Pricing'), link: "/pricing" },
     { name: t('Careers'), link: "/careers" },
