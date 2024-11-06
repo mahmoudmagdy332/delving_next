@@ -1,4 +1,5 @@
 
+import Benefits from '@/components/about/Benefits';
 import Hero from '@/components/about/Hero';
 
 import { getAboutAPI } from '@/utils/api';
@@ -12,7 +13,7 @@ const about = async ({ params: { locale } }:{params: { locale:string }}) => {
   
      <>
       <Hero About={data.aboutUs} />
-      {/* <Benefits /> */}
+      <Benefits benefits={data.benefits}/>
      </>
        
  

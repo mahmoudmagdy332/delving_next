@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import CourseCard from "./CourseCard";
-import { useMylearningsSelector } from "../../app/slices/myLearningSlice";
+import { useMylearningsSelector } from "@/utils/slices/myLearningSlice"; 
 
 function Recomended() {
   const { suggestions } = useMylearningsSelector((state) => state.myLearningReducer);
@@ -21,7 +21,7 @@ function Recomended() {
    
       <div className="grid  grid-cols-1  sm:grid-cols-2  gap-4">
         {suggestions?.map((course) => (
-          <CourseCard course={course} />
+          <CourseCard course={course} key={course.id} />
         ))}
       </div>
     </div>

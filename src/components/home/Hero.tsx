@@ -1,19 +1,19 @@
+"use client"
 import { Button, Typography } from "@mui/material";
 import HeaderLayout from "../common/HeaderLayout";
-import { useNavigate } from "react-router-dom";
-import { useSettingSliceSelector } from "../../app/slices/settingSlice";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
+
+import { useSettingSliceSelector } from "@/utils/slices/settingSlice"; 
+import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/routing";
 
 const Hero = () => {
   const { setting } = useSettingSliceSelector((state) => state.settingReducer);
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
+  const t = useTranslations('common');
   console.log("setting", setting);
 
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const HandleDelve = () => {
-    navigate("/intro");
+    navigate('intro');
   };
   return (
     <div className="w-11/12 md:w-3/4 mx-auto flex flex-col-reverse items-center my-20 gap-32 lg:flex-row">
@@ -23,8 +23,8 @@ const Hero = () => {
             sx={{ color: "dark.main", fontSize: "24px", fontWeight: "bold" }}
           >
             {setting?.title_intro}
-            {translations.with}{" "}
-            <span style={{ color: "#ffce00" }}>{translations.Delveng}</span>
+            {t('with')}{" "}
+            <span style={{ color: "#ffce00" }}>{t('Delveng')}</span>
           </Typography>
         </HeaderLayout>
         <Typography sx={{ color: "gray.dark" }}>
@@ -41,7 +41,7 @@ const Hero = () => {
             },
           }}
         >
-          {translations.DelveNow}
+          {t('DelveNow')}
         </Button>
       </div>
       <div className="lg:w-1/2">

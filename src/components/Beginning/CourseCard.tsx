@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
-import { course } from "../../app/utils/types/types";
+
+import { Link } from "@/i18n/routing";
+import { course } from "@/utils/types/types"; 
 
 const CourseCard = ({ course }: { course: course }) => {
   return (
     <Link
-      to={`courses/${course.id}`}
+      href={`courses/${course.id}`}
       className="flex hover:shadow-md flex-col gap-5 items-center border rounded-2xl px-4 py-3 justify-between" 
     >
       <img

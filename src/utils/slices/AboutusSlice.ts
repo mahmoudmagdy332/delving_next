@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { AboutSliceType } from "../utils/types/types";
+import { AboutSliceType } from "@/utils/types/types";
 
 const initialState: AboutSliceType = {
   About: null,

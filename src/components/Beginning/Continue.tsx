@@ -1,16 +1,14 @@
 import { Typography } from "@mui/material";
-import { useMylearningsSelector } from "../../app/slices/myLearningSlice";
+import { useMylearningsSelector } from "@/utils/slices/myLearningSlice"; 
 import CourseCard from "./CourseCard";
 import Pagination from "./Pagination";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
+import { useTranslations } from "next-intl";
 
 const Continue = () => {
   const { mylearnings } = useMylearningsSelector(
     (state) => state.myLearningReducer
   );
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
+  const t = useTranslations('common');
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -21,11 +19,11 @@ const Continue = () => {
           my: 4,
         }}
       >
-        {translations.Continuelearning}
+        {t('Continuelearning')}
       </Typography>
       <div className="grid  grid-cols-1 md:grid-cols-2  lg:grid-cols-3  gap-8">
         {mylearnings.data.map((course) => (
-          <CourseCard course={course} />
+          <CourseCard course={course} key={course.id}/>
         ))}
       </div>
       <Pagination />

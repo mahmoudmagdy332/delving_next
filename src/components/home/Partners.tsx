@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useHomeSliceSelector } from "../../app/slices/homeSlice";
+import { useHomeSliceSelector } from "@/utils/slices/homeSlice"; 
 import { Box } from "@mui/material";
 
 const Partners = () => {

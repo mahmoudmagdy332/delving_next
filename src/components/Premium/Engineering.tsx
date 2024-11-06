@@ -1,9 +1,11 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useEffect, useState } from "react";
-import { useHomeSliceSelector } from "../../app/slices/homeSlice";
+import { useHomeSliceSelector } from "@/utils/slices/homeSlice"; 
 import { Box, Button, Typography } from "@mui/material";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+
 
 function Engineering() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -11,9 +13,8 @@ function Engineering() {
     setActiveIndex(index);
   };
   const { categories } = useHomeSliceSelector((state) => state.homeReducer);
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
+  const t = useTranslations('common');
+
 
   useEffect(() => {
     if (categories) {
@@ -31,8 +32,8 @@ function Engineering() {
           <Typography
             sx={{ color: "dark.main", fontSize: "24px", fontWeight: "bold" }}
           >
-            {translations.Engineering}{" "}
-            <span style={{ color: "#ffce00" }}>{translations.Disciplines}</span>
+            {t('Engineering')}{" "}
+            <span style={{ color: "#ffce00" }}>{t('Disciplines')}</span>
           </Typography>
         </Box>
         <Box
@@ -91,7 +92,7 @@ function Engineering() {
                     fontWeight: 400,
                   }}
                 >
-                  {translations.CoursesIn}{" "}
+                  {t('CoursesIn')}{" "}
                 </Typography>
                 <Typography
                   sx={{
@@ -107,8 +108,8 @@ function Engineering() {
               <Box className="flex flex-col gap-4 mt-4">
                 {categories &&
                   categories[activeIndex].courses.map((item) => (
-                    <div className="flex gap-2 items-center">
-                      <img alt="" src={item.image} className="w-8" />
+                    <div className="flex gap-2 items-center" key={item.id}>
+                      <img alt={item.name} src={item.image} className="w-8" />
                       <Typography sx={{ fontWeight: "500", fontSize: "18px" }}>
                         {item.name}
                       </Typography>

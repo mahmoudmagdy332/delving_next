@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
-import { useHomeSliceSelector } from "../../app/slices/homeSlice";
+
+import { useHomeSliceSelector } from "@/utils/slices/homeSlice"; 
 import Recomended from "./Recomended";
-import { useMylearningsSelector } from "../../app/slices/myLearningSlice";
+import { useMylearningsSelector } from "@/utils/slices/myLearningSlice"; 
 import Continue from "./Continue";
-import { useUserSelector } from "../../app/slices/UserSlice";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
+import { useUserSelector } from "@/utils/slices/UserSlice"; 
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+
 
 function Learning() {
   const { newCourses } = useHomeSliceSelector((state) => state.homeReducer);
@@ -12,15 +14,12 @@ function Learning() {
     (state) => state.myLearningReducer
   );
   const { user } = useUserSelector((state) => state.UserReducer);
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
-
+  const t = useTranslations('common');
   return (
     <div className="p-4 flex flex-col  gap-4">
       {mylearnings.data.length > 0 ? (
         <div className="flex flex-col  gap-4">
-          <h1 className="text-2xl font-bold my-8">{translations.JumpBack}</h1>
+          <h1 className="text-2xl font-bold my-8">{t('JumpBack')}</h1>
           <div
             className="flex flex-col border-2 border-gray-200 gap-4 rounded-xl  "
             style={{
@@ -53,10 +52,10 @@ function Learning() {
 
               <div className="w-full p-8 text-center">
                 <Link
-                  to={`/courses/${mylearnings.data[0].id}`}
+                  href={`/courses/${mylearnings.data[0].id}`}
                   className=" py-2 w-full flex items-center justify-center  border-black bg-black border-2  rounded-full text-lg text-white"
                 >
-                  <p> {translations.ContinuePath}</p>
+                  <p> {t('ContinuePath')}</p>
                 </Link>
               </div>
             </div>
@@ -95,14 +94,14 @@ function Learning() {
               <div className="w-full p-8 text-center">
                 {user?.is_premium ? (
                   <Link
-                    to={`/courses/${newCourses && newCourses[0]?.id}`}
+                    href={`/courses/${newCourses && newCourses[0]?.id}`}
                     className=" py-2 w-full flex items-center justify-center  border-black bg-black border-2  rounded-full text-lg text-white"
                   >
                     <p> Start now</p>
                   </Link>
                 ) : (
                   <Link
-                    to={"/pricing"}
+                    href={"/pricing"}
                     className=" py-2 w-full flex items-center justify-center  border-black bg-black border-2  rounded-full text-lg text-white"
                   >
                     <p> subscribe now</p>

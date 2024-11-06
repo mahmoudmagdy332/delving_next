@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import React from "react";
-import { Benefits } from "../../app/utils/types/types";
+import { Benefits } from "@/utils/types/types"; 
 
 interface props {
   item: Benefits;

@@ -1,18 +1,19 @@
 import { MdRadioButtonChecked } from "react-icons/md";
 import { IoMdRadioButtonOff } from "react-icons/io";
-import { useUserSelector } from "../../app/slices/UserSlice";
-import { useLanguageSelector } from "../../app/slices/languageSlice";
+import { useUserSelector } from "@/utils/slices/UserSlice"; 
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+
 
 function Achieving() {
+  const t = useTranslations('common');
   const week: string[] = ["Su", "M", "T", "W", "Th"];
   const { user } = useUserSelector((state) => state.UserReducer);
-  const { translations } = useLanguageSelector(
-    (store) => store.languageReducer
-  );
+  
   return (
     <div className=" flex flex-col gap-4 mt-4">
       <h1 className="text-2xl font-bold my-8">
-        {translations.Welcome}, {user?.fname}
+        {t('Welcome')}, {user?.fname}
       </h1>
       <div className="flex flex-col border-2 gap-4 rounded-xl">
         <div className="p-4">
@@ -46,7 +47,7 @@ function Achieving() {
         </div>
         <div className="flex flex-col bg-[#f2f2f2]">
           <p className="my-4 font-bold text-xl text-center ">
-            {translations.LEARNINGHABIT}
+            {t('LEARNINGHABIT')}
           </p>
           <div className="flex items-center p-2">
             <div className="p-4 bg-gray-100 rounded-lg">
@@ -56,7 +57,7 @@ function Achieving() {
                 </div>
 
                 <span className="text-black font-semibold">
-                  {translations.FirstCourse}
+                  {t('FirstCourse')}
                 </span>
               </div>
               <div className="flex items-center space-x-2 mb-2">
@@ -64,7 +65,7 @@ function Achieving() {
                   <IoMdRadioButtonOff />
                 </div>
                 <span className="text-black font-semibold">
-                  {translations.FirstLesson}
+                  {t('FirstLesson')}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
@@ -72,7 +73,7 @@ function Achieving() {
                   <IoMdRadioButtonOff />
                 </div>
                 <span className="text-black font-semibold">
-                  {translations.ContinueTomorrow}
+                  {t('ContinueTomorrow')}
                 </span>
               </div>
             </div>

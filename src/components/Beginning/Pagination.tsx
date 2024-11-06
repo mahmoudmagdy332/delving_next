@@ -1,7 +1,7 @@
 import { Pagination as MuiPagination } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../app/store";
-import { setCurrentPage, useMylearningsSelector } from "../../app/slices/myLearningSlice";
+import { AppDispatch } from "@/utils/store"; 
+import { setCurrentPage, useMylearningsSelector } from "@/utils/slices/myLearningSlice";
 
 function Pagination() {
   const {mylearnings}=useMylearningsSelector((state)=>state.myLearningReducer)

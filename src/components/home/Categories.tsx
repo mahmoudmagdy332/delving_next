@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material"
-import { useHomeSliceSelector } from "../../app/slices/homeSlice"
+import { useHomeSliceSelector } from "@/utils/slices/homeSlice";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";

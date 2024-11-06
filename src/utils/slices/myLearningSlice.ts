@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import {  mylearningsType } from "../utils/types/types";
+import {  mylearningsType } from "@/utils/types/types";
 
 const initialState: mylearningsType = {
   mylearnings: {

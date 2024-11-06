@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { homeType } from "../utils/types/types";
+import { homeType } from "../types/types"; 
 
 const initialState: homeType = {
   newCourses: null,
