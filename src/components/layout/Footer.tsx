@@ -4,13 +4,13 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa6";
-import { useTranslation } from 'react-i18next';
 import { useSettingSliceSelector } from "@/utils/slices/settingSlice";
 import Link from 'next/link'
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
   const { setting } = useSettingSliceSelector((state) => state.settingReducer);
-  const { t } = useTranslation('common');
+  const  t  = useTranslations('common');
    
 
   const pages2 = [

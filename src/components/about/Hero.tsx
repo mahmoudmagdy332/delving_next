@@ -2,18 +2,15 @@
 import { Box, Typography } from "@mui/material";
 import HeaderLayout from "../common/HeaderLayout";
 import { AboutUs } from "@/utils/types/types";
-import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 // import { useLanguageSelector } from "../../app/slices/languageSlice";
 
 const Hero = ({About}:{About:AboutUs[]}) => {
 
+  const t = useTranslations('common');
    
-   
-  useEffect(()=>{
-    console.log('aboutsadsad',About);
-    
-  },[About])
+
   const about: string | null = About && About?.[0]?.title;
   const about_des: string | null = About && About?.[0]?.description;
   console.log('About',About);
@@ -22,6 +19,7 @@ const Hero = ({About}:{About:AboutUs[]}) => {
     <div className="w-10/12 lg:w-3/4 mx-auto my-20 ">
       <div className="flex flex-col gap-5 items-center">
         <HeaderLayout>
+          {t('Profile')}
           <Typography
             sx={{
               fontSize: "28px",

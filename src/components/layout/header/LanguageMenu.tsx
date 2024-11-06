@@ -12,16 +12,15 @@ import {
   Tooltip,
 } from "@mui/material";
 import { Logout, PersonAdd } from "@mui/icons-material";
-import { useTranslation } from "react-i18next";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
 import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/routing";
 const LanguageMenu = () => {
-  const { t } = useTranslation('common');
+  const t  = useTranslations('common');
   const [isLogin] = useState(false);
   const currentPathname = usePathname();
   const storelocale = Cookies.get("NEXT_LOCALE");
-  const router = useRouter();
+
   const [currentLocale,setCurrentLocale]=useState<string>();
   useEffect(()=>{
     if(storelocale){
@@ -31,39 +30,8 @@ const LanguageMenu = () => {
       setCurrentLocale('en')
     }
   },[storelocale])
-  useEffect(()=>{
-    if(currentPathname.includes('/en')){
-      router.push(
-        currentPathname.replace(`/en`,`/${currentLocale}`)
-      );
-    }else{
-      router.push(
-        currentPathname.replace(`/ar`,`/${currentLocale}`)
-      );
-    }
-    router.refresh();
-    
-  },[currentLocale])
-  const change = (e:string) => {
-    const newLocale = e;
 
-    // set cookie for next-i18n-router
-    const days = 30;
-    const date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    const expires = date.toUTCString();
-    document.cookie = `NEXT_LOCALE=${newLocale};expires=${expires};path=/`;
 
-     console.log('currentLocale',currentLocale);
-     console.log('newLocale',newLocale);
-     console.log('currentPathname',currentPathname);
-     setCurrentLocale(newLocale)
-      // router.push(
-      //   currentPathname.replace(`/${currentLocale}`, `/${newLocale}`)
-      // );
-      // router.refresh();
-      // window.location.reload();
-  };
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -184,14 +152,13 @@ const LanguageMenu = () => {
           >
             {currentLocale === "en" ? (
               <MenuItem
-                onClick={() => change("ar")}
+              
                 className={`${currentLocale !== "en" && "hidden"}`}
               >
-                Ar
+                <Link href={currentPathname} locale="ar">ar</Link>
               </MenuItem>
             ) : (
               <MenuItem
-                onClick={() => change("en")}
                 className={`${currentLocale === "en" && "hidden"}`}
               >
                 En

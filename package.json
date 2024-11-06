@@ -1,5 +1,5 @@
 {
-  "name": "delving_next",
+  "name": "localization_next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "15.0.2",
+    "next-intl": "^3.24.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/base": "^5.0.0-beta.61",
@@ -28,10 +30,8 @@
     "i18next-resources-to-backend": "^1.2.1",
     "install": "^0.13.0",
     "js-cookie": "^3.0.5",
-    "next": "15.0.2",
     "next-i18n-router": "^5.5.1",
     "next-i18next": "^15.3.1",
-    "next-intl": "^3.24.0",
     "npm": "^10.9.0",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
@@ -45,7 +45,6 @@
     "swiper": "^11.1.14"
   },
   "devDependencies": {
-    "@types/i18next": "^13.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

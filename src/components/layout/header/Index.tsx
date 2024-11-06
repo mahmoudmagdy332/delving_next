@@ -24,8 +24,8 @@ import Cookies from "js-cookie";
 import { useSettingSliceSelector } from "@/utils/slices/settingSlice"; 
 import UserProfile from "./UserProfile";
 import LanguageMenu from "./LanguageMenu";
-import { useTranslation } from 'react-i18next';
-import Link from 'next/link'
+import { useTranslations } from "next-intl"; 
+import {Link} from '@/i18n/routing';
 interface Props {
 
   window?: () => Window;
@@ -34,7 +34,7 @@ interface Props {
 const drawerWidth = 240;
 
 export default function Index(props: Props) {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
   const navItems = [
     { name: t('home'), link: "/" },
     { name: t('Courses'), link: "courses" },
@@ -67,8 +67,8 @@ export default function Index(props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Box sx={{ my: 2, width: "90%", mx: "auto" }}>
-        <img alt="" src={setting?.logo} />
+      <Box >
+        <img alt="" src={setting?.logo} className="w-32" />
       </Box>
       <Divider />
       <List sx={{ m: "20px" }}>
@@ -268,7 +268,7 @@ export default function Index(props: Props) {
                     {t('login')}
                   </Button>
 
-                  <LanguageMenu />
+                  <LanguageMenu  />
                 </Box>
               )}
               <IconButton
