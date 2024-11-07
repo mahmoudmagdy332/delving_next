@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { ArticleCatSliceType } from "../utils/types/types";
+import { ArticleCatSliceType } from "../types/types"; 
 
 const initialState: ArticleCatSliceType = {
   ArticleCategory: null,

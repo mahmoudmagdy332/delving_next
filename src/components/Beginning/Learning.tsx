@@ -52,7 +52,7 @@ function Learning() {
 
               <div className="w-full p-8 text-center">
                 <Link
-                  href={`/courses/${mylearnings.data[0].id}`}
+                  href={`/${mylearnings.data[0].id}/courses`}
                   className=" py-2 w-full flex items-center justify-center  border-black bg-black border-2  rounded-full text-lg text-white"
                 >
                   <p> {t('ContinuePath')}</p>

@@ -2,7 +2,7 @@ import { MdRadioButtonChecked } from "react-icons/md";
 import { IoMdRadioButtonOff } from "react-icons/io";
 import { useUserSelector } from "@/utils/slices/UserSlice"; 
 import { useTranslations } from "next-intl";
-import Image from "next/image";
+
 
 
 function Achieving() {

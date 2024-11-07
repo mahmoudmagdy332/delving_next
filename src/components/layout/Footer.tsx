@@ -5,7 +5,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { useSettingSliceSelector } from "@/utils/slices/settingSlice";
-import Link from 'next/link'
+import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 
 const Footer = () => {
@@ -16,7 +16,7 @@ const Footer = () => {
   const pages2 = [
     { name: t('AboutUs'), link: "/about" },
     { name: t('Careers'), link: "/careers" },
-    { name: t('FAQs'), link: "/faq" },
+    { name: t('FAQs'), link: "/faqs" },
     { name: t('Help'), link: "/help" },
   ];
 
@@ -40,7 +40,7 @@ const Footer = () => {
           </Box>
           <div className="flex flex-col gap-3 items-center md:items-start">
             {setting?.pages.map((page) => (
-              <Link href={`page/${page.slug}`} key={page.slug}>
+              <Link href={`/page/${page.slug}`} key={page.slug}>
                 <Typography
                   sx={{ color: "#fcfcfd", "&:hover": { color: "#ffe266" } }}
                 >

@@ -1,7 +1,8 @@
+
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { ArticleCategoryQuery } from "../../services/queries";
-import { setArticleCat } from "../../slices/ArticleCatSlice";
+import { ArticleCategoryQuery } from "../services/queries"; 
+import { setArticleCat } from "../slices/ArticleCatSlice"; 
 
 export const useCategoryArticle = ({ name }: { name: string | undefined }) => {
   const dispatch = useDispatch();

@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import {
   setLevel,
   useCoursesSliceSelector,
-} from "../../app/slices/coursesSlice";
+} from "@/utils/slices/coursesSlice";
 import BottonPath from "./BottonPath";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../app/store";
+import { AppDispatch } from "@/utils/store";
 
 const Path = () => {
   const { singleCourse } = useCoursesSliceSelector(
@@ -76,6 +76,7 @@ const Path = () => {
     <>
       {singleCourse?.levels.map((level, idx) => (
         <div
+          key={idx}
           className="relative pb-20 my-10"
           ref={(el) => (refs.current[idx] = el)}
         >

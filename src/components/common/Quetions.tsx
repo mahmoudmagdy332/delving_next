@@ -7,7 +7,7 @@ import MuiAccordionSummary, {
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import { useFQsSliceSelector } from "../../app/slices/FQsSlice";
+import { useFQsSliceSelector } from "@/utils/slices/FQsSlice";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -59,6 +59,7 @@ export default function Quetions() {
     <div className="flex flex-col gap-5">
       {Questions?.map((Question) => (
         <Accordion
+        key={Question.id}
           sx={{ bgcolor: "transparent" }}
           className="rounded-xl"
           expanded={expanded === `panel${Question.id}`}

@@ -25,7 +25,7 @@ const CourseCard: React.FC<courseProps> = ({ course }) => {
         />
       </div>
       <div className="mt-auto">
-        <Link href={`/courses/${course?.id}`}>
+        <Link href={`/${course?.id}/courses`}>
           <Button
             sx={{
               color: "black.light",

@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { FQsSliceType } from "../utils/types/types";
+import { FQsSliceType } from "../types/types"; 
 
 const initialState: FQsSliceType = {
   Questions: null,

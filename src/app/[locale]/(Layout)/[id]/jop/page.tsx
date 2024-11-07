@@ -1,4 +1,6 @@
+"use client"
 import { Box, Button, Typography } from "@mui/material";
+
 
 import { careerQuery } from "@/utils/services/queries";
 import Loader from "@/components/common/Loader"; 

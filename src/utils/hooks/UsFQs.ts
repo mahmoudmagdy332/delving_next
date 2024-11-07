@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { FQsQuery } from "../../services/queries";
+import { FQsQuery } from "../services/queries";
 import { useEffect } from "react";
-import { setQuestions } from "../../slices/FQsSlice";
+import { setQuestions } from "../slices/FQsSlice";
 
 export const UseFQs = () => {
   const dispatch = useDispatch();

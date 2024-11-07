@@ -5,7 +5,7 @@ import { course } from "@/utils/types/types";
 const CourseCard = ({ course }: { course: course }) => {
   return (
     <Link
-      href={`courses/${course.id}`}
+      href={`/${course.id}/courses`}
       className="flex hover:shadow-md flex-col gap-5 items-center border rounded-2xl px-4 py-3 justify-between" 
     >
       <img

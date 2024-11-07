@@ -1,11 +1,15 @@
-import {  useNavigate } from "react-router-dom";
+
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
-import { useUserSelector } from "../../app/slices/UserSlice";
+import { useUserSelector } from "@/utils/slices/UserSlice"; 
+import { useRouter } from "@/i18n/routing";
+import image from "@/../public/images/LOGO/gift-plan.svg.png"
+import Image from "next/image";
+
 const BottonPath = ({ title, top, left,scorm_url,id,started}:{ id:number,scorm_url:string,title:string, top:number,started:boolean, left :number}) => {
     const [imageIndex, setImageIndex] = useState(0);
-    const navigator = useNavigate();
+    const navigator = useRouter();
     const {user}=useUserSelector(state=>state.UserReducer)
     const [images,setImages]=useState<string[]>([ '/images/default on.svg',
       '',
@@ -15,10 +19,14 @@ const BottonPath = ({ title, top, left,scorm_url,id,started}:{ id:number,scorm_u
         if(!user.is_premium){
           setImages([
             '/images/locked on.svg',
+            '',
+      '/images/pressed on.svg'
           ])
         }else if(!user.survey_submited){
           setImages([
             '/images/locked on.svg',
+            '',
+      '/images/pressed on.svg'
           ])
         }else{
           setImages([ '/images/default on.svg',
@@ -28,6 +36,8 @@ const BottonPath = ({ title, top, left,scorm_url,id,started}:{ id:number,scorm_u
       }else{
         setImages([
           '/images/locked on.svg',
+          '',
+          '/images/pressed on.svg'
         ])
       }
     },[user])
@@ -38,15 +48,15 @@ const BottonPath = ({ title, top, left,scorm_url,id,started}:{ id:number,scorm_u
       setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
       if(user){
         if(!user.is_premium){
-          navigator("/pricing");
+          navigator.push("/pricing");
         }else if(!user.survey_submited){
-          navigator("/welcome");
+          navigator.push("/welcome");
         }else{
           localStorage.setItem('scorm_url',scorm_url)
-          navigator(`/courses/${title}/${id}`);
+          navigator.push(`/${id}/scorm`);
         }
       }else{
-        navigator("/login");
+        navigator.push("/signin");
       }
         
      
@@ -61,13 +71,14 @@ const BottonPath = ({ title, top, left,scorm_url,id,started}:{ id:number,scorm_u
         }} >
           {started&&(
             <div className="absolute -top-10 ">
-              <img  src="images/LOGO/gift-plan.svg.png" className="w-16 "/>
+              <Image  src={image} alt="start" className="w-16 "/>
             </div>
           )}
           <motion.button
       onTapStart={handleTap} // Change the image on tap
       onTap={handleClick} // Reset the image when the tap is completed
       onClick={handleClick}
+      style={{backgroundColor:'transparent'}}
     >
       <motion.img
       className="absolute w-24 right-3  z-9"
@@ -81,10 +92,9 @@ const BottonPath = ({ title, top, left,scorm_url,id,started}:{ id:number,scorm_u
 
       onClick={handleClick}
     />
-             </motion.button>
+      </motion.button>
          
-            <Typography sx={{mt:"100px",color:"primary.light"}} className="w-24">{title}</Typography>
-            
+      <Typography sx={{mt:"100px",color:"primary.light"}} className="w-24">{title}</Typography>
         </div>
         </>
        
